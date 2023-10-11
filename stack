@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define MAX_SIZE 100
+
+int balanced(const char* input_str)
+{
+    char stack[MAX_SIZE];
+    int top = -1;
+    for(int i=0;input_str[i]!=0;i++)
+    {
+        if (input_str[i]=='('|| input_str[i]=='['||input_str[i]=='{')
+    {
+        stack[++top]=input_str[i];
+    }
+    else if (input_str[i]==')'&& (top == -1 || stack[top--]!= '('))
+    {
+        return 0;
+    }
+    else if (input_str[i]== ']' && (top ==-1 || stack[top--]!='['))
+    {
+        return 0;
+    }
+    else if (input_str[i]=='}' && (top==-1 || stack[top--]!='{'))
+    {
+        return 0;
+    }
+}
+
+return top == -1;
+}
+
+int main()
+{
+    char sequence[100];
+    printf("Enter a sequence of characters: \n");
+    fgets(sequence, sizeof(sequence), stdin);
+    if (balanced(sequence))
+    {
+        printf("The delimiters are balanced\n");
+    }
+    else
+    {
+        printf("The delimiters are unbalanced\n");
+    }
+    return 0;
+}
